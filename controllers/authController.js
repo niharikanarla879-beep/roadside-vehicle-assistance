@@ -105,7 +105,7 @@ exports.loginMechanic = async (req, res) => {
     </script>
 `);
         }
-       req.session.mechanicId = mechanic._id;
+
        return res.redirect('/api/mechanic/mechanic-dashboard')
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error });
