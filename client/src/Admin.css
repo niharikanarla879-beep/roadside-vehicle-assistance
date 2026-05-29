@@ -1,0 +1,46 @@
+.admin-container {
+  min-height: 100vh;
+  background-color: #0f172a;
+  color: white;
+  padding: 40px;
+}
+
+.admin-container h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #38bdf8;
+}
+
+.requests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.request-card {
+  background-color: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.request-card h2 {
+  color: #38bdf8;
+  margin-bottom: 15px;
+}
+
+.request-card p {
+  margin-bottom: 10px;
+  color: #cbd5e1;
+}
+
+.delete-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ef4444;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+     <link rel=""stylesheet" href="/style.css">
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#0f172a,#2563eb);
+            padding:30px;
+        }
+
+        .register-container{
+            width:450px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .register-container h1{
+            text-align:center;
+            margin-bottom:30px;
+            color:#111827;
+            font-size:38px;
+        }
+
+        .input-group{
+            margin-bottom:18px;
+        }
+
+        .input-group label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#374151;
+        }
+
+        .input-group input,
+        .input-group select{
+            width:100%;
+            padding:14px;
+            border:1px solid #d1d5db;
+            border-radius:10px;
+            font-size:16px;
+        }
+
+        .register-btn{
+            width:100%;
+            background:#2563eb;
+            color:white;
+            border:none;
+            padding:14px;
+            border-radius:10px;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+            margin-top:10px;
+        }
+
+        .register-btn:hover{
+            background:#1d4ed8;
+        }
+
+        .login-link{
+            margin-top:20px;
+            text-align:center;
+        }
+
+        .login-link a{
+            text-decoration:none;
+            color:#2563eb;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <h1>Register</h1>
+
+        <form id="registerForm" method="POST">
+
+            <div class="input-group">
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+    <label>Phone Number</label>
+
+    <input
+        type="text"
+        name="phone"
+        placeholder="Enter phone number"
+        required
+    >
+
+</div>
+
+            <div class="input-group">
+
+                <label>Select Role</label>
+
+                <select id="role" name="role">
+
+                    <option value="user">
+                        User
+                    </option>
+
+                    <option value="mechanic">
+                        Mechanic
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- Mechanic Fields -->
+
+            <div id="mechanicFields" style="display:none;">
+
+                <div class="input-group">
+
+                    <label>Specialization</label>
+
+                    <input
+                        type="text"
+                        name="specialization"
+                        placeholder="Bike Repair / Car Repair"
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Location</label>
+
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="Enter your location"
+                    >
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="register-btn">
+                Register
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="/login">
+                Login
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+
+        const role =
+            document.getElementById('role');
+
+        const mechanicFields =
+            document.getElementById('mechanicFields');
+
+        role.addEventListener('change', function(){
+
+            if(role.value === 'mechanic'){
+
+                mechanicFields.style.display = 'block';
+
+            } else {
+
+                mechanicFields.style.display = 'none';
+            }
+
+        });
+
+        const form =
+            document.getElementById('registerForm');
+
+        form.onsubmit = function(e){
+
+            e.preventDefault();
+
+            if(role.value === 'mechanic'){
+
+                form.action =
+                    '/api/auth/register/mechanic';
+
+            } else {
+
+                form.action =
+                    '/api/auth/register/user';
+            }
+
+            form.submit();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

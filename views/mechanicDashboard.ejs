@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanic Dashboard</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Mechanic Dashboard</h1>
+
+    <div class="welcome-box">
+    <h2>Welcome Mechanic 👨‍🔧</h2>
+    <p>Manage service requests, track ongoing work and update payment status.</p>
+</div>
+
+<div class="stats-container">
+    <div class="stat-card">
+        <h3><%= requests.length %></h3>
+        <p>Total Requests</p>
+    </div>
+
+    <div class="stat-card ongoing">
+        <h3>
+            <%= requests.filter(r => r.status === 'Ongoing').length %>
+        </h3>
+        <p>Ongoing</p>
+    </div>
+
+    <div class="stat-card completed">
+        <h3>
+            <%= requests.filter(r => r.status === 'Completed').length %>
+        </h3>
+        <p>Completed</p>
+    </div>
+</div>
+
+    <% requests.forEach(request => { %>
+
+    <div class="request-card">
+
+        <% if(request.status === 'Pending') { %>
+
+        <form action="/api/mechanic/accept-booking/<%= request._id %>" method="POST">
+
+            <button type="submit" class="btn accept-btn">
+                Accept
+            </button>
+
+        </form>
+
+        <% } %>
+
+        <% if(request.status === 'Accepted') { %>
+
+        <form action="/api/mechanic/start-service/<%= request._id %>" method="POST">
+
+            <button type="submit" class="btn start-btn">
+                Start Service
+            </button>
+
+        </form>
+
+        <% } %>
+
+        <% if(request.status === 'Ongoing') { %>
+
+        <form action="/api/mechanic/complete-service/<%= request._id %>" method="POST">
+
+            <input
+                type="number"
+                name="totalAmount"
+                placeholder="Enter Service charge amount"
+                required
+            >
+
+            <button type="submit" class="btn complete-btn">
+                Complete
+            </button>
+
+        </form>
+
+        <% } %>
+        
+        <% if(request.status === 'Completed' && request.paymentStatus !== 'Paid') { %>
+
+        <form action="/api/mechanic/payment/<%= request._id %>" method="POST">
+
+            <button type="submit" class="btn paid-btn">
+               Mark as Paid
+            </button>
+
+      </form>
+
+      <% } %>
+        <p><strong>Customer:</strong> <%= request.userName %></p>
+
+        <p><strong>Vehicle:</strong> <%= request.vehicleType %></p>
+
+        <p><strong>Problem:</strong> <%= request.problem %></p>
+
+        <p><strong>Location:</strong> <%= request.location %></p>
+
+        <p><strong>Status:</strong> <%= request.status %></p>
+
+        <p>
+            <strong>Requested At:</strong>
+            <%= new Date(request.createdAt).toLocaleString() %>
+        </p>
+
+        <% if(request.totalAmount) { %>
+
+        <p>
+            <strong>Service Charge:</strong>
+            ₹ <%= request.totalAmount %>
+        </p>
+
+        <% } %>
+
+        <% if(request.paymentStatus) { %>
+
+        <p>
+            <strong>Payment:</strong>
+            <%= request.paymentStatus %>
+        </p>
+
+        <% } %>
+
+    </div>
+
+    <% }) %>
+
+</div>
+
+</body>
+</html>

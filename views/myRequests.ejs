@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Requests</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#f4f7fb;
+            padding:40px;
+        }
+
+        h1{
+            margin-bottom:30px;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            margin-bottom:20px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .status{
+            padding:8px 15px;
+            border-radius:20px;
+            color:white;
+            font-weight:bold;
+            display:inline-block;
+            margin-top:10px;
+        }
+
+        .Pending{
+            background:orange;
+        }
+
+        .Accepted{
+            background:blue;
+        }
+
+        .Ongoing{
+            background:purple;
+        }
+
+        .Completed{
+            background:green;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<h1>My Service Requests</h1>
+<% if(requests.length === 0){ %>
+
+   <h3>No Requests Available</h3>
+
+<% } %>
+<% requests.forEach(request => { %>
+
+<div class="card">
+
+    <h2><%= request.vehicle %></h2>
+
+    <p><strong>Problem:</strong> <%= request.problem %></p>
+
+    <p><strong>Location:</strong> <%= request.location %></p>
+
+    <div class="status <%= request.status.trim() %>">
+        <%= request.status %>
+    </div>
+
+</div>
+
+<% }) %>
+
+</body>
+</html>

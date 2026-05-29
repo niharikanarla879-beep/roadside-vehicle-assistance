@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+        }
+
+        .navbar{
+            background:#111827;
+            color:white;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .navbar h1{
+            font-size:34px;
+        }
+
+        .logout-btn{
+            background:#ef4444;
+            color:white;
+            padding:10px 20px;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .container{
+            width:90%;
+            margin:auto;
+            margin-top:30px;
+        }
+
+        .welcome-card{
+            background:white;
+            padding:30px;
+            border-radius:16px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom:30px;
+        }
+
+        .welcome-card h2{
+            font-size:32px;
+            margin-bottom:10px;
+        }
+
+        .welcome-card p{
+            color:gray;
+            font-size:18px;
+        }
+
+        .dashboard-grid{
+            display:grid;
+            grid-template-columns:2fr 1fr;
+            gap:25px;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:16px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h2{
+            margin-bottom:20px;
+            color:#111827;
+        }
+
+        .mechanic-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .mechanic-card{
+            background:#f9fafb;
+            border-left:5px solid #2563eb;
+            padding:20px;
+            border-radius:12px;
+        }
+
+        .mechanic-card h3{
+            margin-bottom:10px;
+            color:#111827;
+        }
+
+        .mechanic-card p{
+            margin-bottom:8px;
+            color:#444;
+        }
+
+        .status{
+            display:inline-block;
+            margin-top:10px;
+            background:#22c55e;
+            color:white;
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:14px;
+        }
+
+        form input,
+        form textarea,
+        form select{
+            width:100%;
+            padding:14px;
+            margin-bottom:15px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            font-size:16px;
+        }
+
+        textarea{
+            resize:none;
+            height:120px;
+        }
+
+        .submit-btn{
+            width:100%;
+            padding:14px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-size:18px;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .submit-btn:hover{
+            background:#1e40af;
+        }
+
+        .request-card{
+            background:#f9fafb;
+            padding:20px;
+            border-radius:12px;
+            margin-bottom:15px;
+            border-left:5px solid orange;
+        }
+
+        .request-card p{
+            margin-bottom:8px;
+        }
+
+        .pending{
+            background:orange;
+            color:white;
+            padding:5px 12px;
+            border-radius:20px;
+            display:inline-block;
+            margin-top:10px;
+        }
+
+        .accepted{
+            background:green;
+            color:white;
+            padding:5px 12px;
+            border-radius:20px;
+            display:inline-block;
+            margin-top:10px;
+        }
+
+        @media(max-width:900px){
+
+            .dashboard-grid{
+                grid-template-columns:1fr;
+            }
+
+            .navbar{
+                flex-direction:column;
+                gap:15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="navbar">
+
+        <h1>🚗 User Dashboard</h1>
+
+        <a href="/" class="logout-btn">Logout</a>
+
+    </div>
+
+    <div class="container">
+
+        <div class="welcome-card">
+
+            <h2>Welcome User 👋</h2>
+
+            <p>
+                Find nearby mechanics and request roadside assistance instantly.
+            </p>
+
+        </div>
+
+        <div class="dashboard-grid">
+
+            <div>
+
+                <div class="card">
+
+                    <h2>Available Mechanics</h2>
+
+                    <div class="mechanic-grid">
+
+                        <% if(mechanics.length > 0){ %>
+
+                            <% mechanics.forEach(mechanic => { %>
+
+                                <div class="mechanic-card">
+
+                                    <h3><%= mechanic.name %></h3>
+
+                                    <p>
+                                        <strong>Phone:</strong>
+                                        <%= mechanic.phone %>
+                                    </p>
+
+                                    <p>
+                                        <strong>Email:</strong>
+                                        <%= mechanic.email %>
+                                    </p>
+
+                                    <p>
+                                        <strong>Location:</strong>
+                                        <%= mechanic.location || "Karimnagar" %>
+                                    </p>
+
+                                    <span class="status">
+                                        Available
+                                    </span>
+
+                                </div>
+
+                            <% }) %>
+
+                        <% } else { %>
+
+                            <p>No mechanics available right now.</p>
+
+                        <% } %>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="card">
+
+                    <h2>Your Assistance Requests</h2>
+
+                    <% if(requests.length > 0){ %>
+
+                        <% requests.forEach(request => { %>
+
+                            <div class="request-card">
+
+                                <p>
+                                    <strong>Vehicle:</strong>
+                                    <%= request.vehicleType %>
+                                </p>
+
+                                <p>
+                                    <strong>Problem:</strong>
+                                    <%= request.problem %>
+                                </p>
+
+                                <p>
+                                    <strong>Location:</strong>
+                                    <%= request.location %>
+                                </p>
+
+                                <% if(request.status === "accepted"){ %>
+
+                                    <span class="accepted">
+                                        Mechanic Accepted
+                                    </span>
+
+                                <% } else { %>
+
+                                    <span class="pending">
+                                        Pending
+                                    </span>
+
+                                <% } %>
+
+                            </div>
+
+                        <% }) %>
+
+                    <% } else { %>
+
+                        <p>No requests found.</p>
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="card">
+
+                    <h2>Request Roadside Assistance</h2>
+
+                    <form action="/api/request/create" method="POST">
+
+    <input
+        type="text"
+        name="userName"
+        placeholder="Your Name"
+        required
+    >
+
+    <input
+        type="text"
+        name="vehicleType"
+        placeholder="VehicleType"
+        required
+    >
+
+    <textarea
+        name="problem"
+        placeholder="Describe Problem"
+        required
+    ></textarea>
+
+    <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        required
+    >
+
+    <button type="submit">
+        Request Assistance
+    </button>
+
+</form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
