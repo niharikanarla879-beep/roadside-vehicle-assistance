@@ -36,6 +36,11 @@ mechanicPhone: {
    type: String,
    default: ''
 },
+serviceCharge:{
+    type: String,
+    default:''
+
+},
     createdAt: {
         type:Date,      
         default:Date.now

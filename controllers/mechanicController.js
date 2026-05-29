@@ -64,6 +64,7 @@ exports.startService = async (req, res) => {
         }
 
         booking.status = 'Ongoing';
+        booking.serviceCharge = req.body.serviceCharge;
         await booking.save();
 
         res.status(200).json({ message: 'Service started!', booking });
