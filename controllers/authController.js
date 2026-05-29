@@ -101,7 +101,7 @@ exports.loginMechanic = async (req, res) => {
             return res.send(`
     <script>
         alert('Admin not approved yet!');
-        window.location.href = '/login';
+        window.location.href = '/api/admin/dashboard';
     </script>
 `);
         }
