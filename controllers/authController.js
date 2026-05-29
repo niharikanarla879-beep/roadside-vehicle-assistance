@@ -76,7 +76,7 @@ exports.loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        return res.redirect('/api/user/user-dashboard');
+        return res.redirect('/user-dashboard');
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error });
     }
