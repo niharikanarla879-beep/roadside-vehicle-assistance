@@ -76,7 +76,7 @@ exports.loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        return res.redirect('/user-dashboard');
+        return res.redirect('/api/user/user-dashboard');
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error });
     }
@@ -106,7 +106,7 @@ exports.loginMechanic = async (req, res) => {
 `);
         }
 
-       return res.redirect('/mechanic-dashboard')
+       return res.redirect('/api/mechanic/mechanic-dashboard')
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error });
     }
