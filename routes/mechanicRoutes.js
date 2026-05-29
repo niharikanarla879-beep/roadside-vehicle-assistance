@@ -26,7 +26,9 @@ router.post("/accept-booking/:id",async (req, res) => {
 
     await Request.findByIdAndUpdate(req.params.id, {
         $set: {
-            status: "Accepted"
+            status: "Accepted",
+            mechanicName:'YOUR_MECHANIC_NAME',
+            mechanicPhone: 'YOUR_PHONE'
         }
     });
 

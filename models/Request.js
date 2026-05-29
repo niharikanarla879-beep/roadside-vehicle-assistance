@@ -26,6 +26,16 @@ const requestSchema = new mongoose.Schema({
         type: String,
         default: 'Pending'
     },
+
+    mechanicName: {
+   type: String,
+   default: ''
+},
+
+mechanicPhone: {
+   type: String,
+   default: ''
+},
     createdAt: {
         type:Date,      
         default:Date.now
