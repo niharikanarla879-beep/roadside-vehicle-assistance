@@ -28,7 +28,7 @@ router.post('/create', async (req, res) => {
             status: 'Pending'
         });
 
-        res.redirect('/api/user/user-dashboard');
+        res.redirect('/user-dashboard');
 
     } catch (error) {
 
