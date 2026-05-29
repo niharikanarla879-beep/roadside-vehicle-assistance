@@ -54,7 +54,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.redirect('/login');
+    res.redirect('/register');
 });
 
 app.get('/login', (req, res) => {
