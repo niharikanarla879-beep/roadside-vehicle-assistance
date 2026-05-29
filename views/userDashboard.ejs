@@ -298,7 +298,28 @@
                                     <%= request.location %>
                                 </p>
 
-                                <% if(request.status === "accepted"){ %>
+                                <% if(request.mechanicName) { %>
+                                  <p>
+                                     <strong>Mechanic:</strong>
+                                     <%= request.mechanicName || "Not Assigned Yet" %>
+                                    </p>
+                                <% } %>
+
+                                <% if(request.mechanicPhone) { %>
+                                     <p>
+                                          <strong>Phone:</strong>
+                                          <%= request.mechanicPhone || "Not Available" %>
+                                     </p>
+                                <% } %>
+
+                                <% if(request.serviceCharge) { %>
+                                     <p>
+                                          <strong>Service Charge:</strong>
+                                           ₹<%= request.serviceCharge %>
+                                     </p>
+                                <% } %> 
+
+                                <% if(request.status === "Accepted"){ %>
 
                                     <span class="accepted">
                                         Mechanic Accepted

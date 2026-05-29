@@ -22,17 +22,24 @@ router.get('/mechanic-dashboard', mechanicDashboard);
 
 //accept Route
 
-router.post("/accept-booking/:id",async (req, res) => {
+router.post("/accept-booking/:id", async (req, res) => {
 
-    await Request.findByIdAndUpdate(req.params.id, {
-        $set: {
-            status: "Accepted",
-            mechanicName:'YOUR_MECHANIC_NAME',
-            mechanicPhone: 'YOUR_PHONE'
-        }
-    });
+    try {
 
-    res.redirect("/api/mechanic/mechanic-dashboard");
+        await Request.findByIdAndUpdate(req.params.id, {
+            $set: {
+                status: "Accepted",
+                mechanicName: "Raju Mechanic",
+                mechanicPhone: "9876543210"
+            }
+        });
+
+        res.redirect("/api/mechanic/mechanic-dashboard");
+
+    } catch (error) {
+        console.log(error);
+        res.send("Error");
+    }
 
 });
 

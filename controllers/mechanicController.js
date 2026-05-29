@@ -38,6 +38,8 @@ exports.acceptBooking = async (req, res) => {
         }
 
         booking.status = 'Accepted';
+        booking.mechanicName = req.user.name;
+        booking.mechanicPhone = req.user.phone;
         await booking.save();
 
         res.status(200).json({ message: 'Booking accepted!', booking });
